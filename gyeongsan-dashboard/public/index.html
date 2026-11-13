@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="경산행운부동산의 경산시 아파트 실거래 브리핑 대시보드" />
+  <title>경산행운부동산 | 경산시 부동산 대시보드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="경산행운부동산 홈">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M9 30 32 10l23 20v25H9Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M18 31v17h28V31L32 20Z" fill="currentColor" opacity=".13"/>
+          <path d="M22 48V34h20v14M27 40h10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          <path d="M47 12v10" stroke="#26d6a2" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span><strong>경산행운부동산</strong><small>GYEONGSAN PROPERTY LAB</small></span>
+      </a>
+      <nav class="main-nav" aria-label="주요 메뉴">
+        <a class="active" href="#overview">시장현황</a>
+        <a href="#top10">아파트 Top 10</a>
+        <a href="#listings">추천매물</a>
+        <a href="#analysis">입지분석</a>
+      </nav>
+      <a class="phone" href="tel:01038182574"><span>상담문의</span><strong>010-3818-2574</strong></a>
+    </header>
+
+    <main>
+      <section id="overview" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">2026 GYEONGSAN MARKET BRIEF</p>
+          <h1>경산의 흐름을 읽고,<br><em>좋은 집의 타이밍</em>을 찾습니다.</h1>
+          <p>실거래 기반 시장 흐름부터 단지별 입지까지 한눈에 설명하는<br class="desktop-only"> 경산행운부동산의 고객 브리핑 보드입니다.</p>
+        </div>
+        <div class="hero-aside">
+          <div class="live-state"><i></i><span id="dataState">데이터 확인 중</span></div>
+          <div class="brief-date"><span>BRIEFING DATE</span><strong id="briefDate">2026.11.13</strong></div>
+          <div class="mini-skyline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </section>
+
+      <section class="filter-card" aria-label="조회 조건">
+        <div class="field"><label for="dongSelect">지역 선택</label><select id="dongSelect"></select></div>
+        <div class="field grow"><label for="aptSelect">아파트</label><select id="aptSelect"><option value="전체">전체 아파트</option></select></div>
+        <div class="period-tabs" role="group" aria-label="조회 기간"><button class="active" data-period="week">주간</button><button data-period="month">월간</button><button data-period="custom">직접 지정</button></div>
+        <div class="date-range"><input id="startDate" type="date" aria-label="시작일"><span>—</span><input id="endDate" type="date" aria-label="종료일"></div>
+        <button id="searchBtn" class="search-btn">조회하기 <span>↗</span></button>
+      </section>
+
+      <section class="kpi-grid" aria-label="주요 시장 지표">
+        <article class="kpi featured"><div><span>평균 매매가</span><strong id="avgSale">4억 4,250만</strong></div><b id="saleChange">+2.4%</b><small>전월 대비</small></article>
+        <article class="kpi"><span>평균 전세가</span><strong id="avgLease">2억 8,250만</strong><div class="spark"><i style="height:30%"></i><i style="height:42%"></i><i style="height:36%"></i><i style="height:58%"></i><i style="height:72%"></i><i style="height:66%"></i><i style="height:83%"></i></div></article>
+        <article class="kpi"><span>전세가율</span><strong id="leaseRatio">63.8%</strong><div class="ring" style="--p:64"><i></i></div></article>
+        <article class="kpi"><span>기간 내 거래</span><strong id="dealCount">77건</strong><p><b>매매 42</b> · 전월세 35</p></article>
+      </section>
+
+      <section id="top10" class="top-section">
+        <div class="section-heading"><div><span class="section-no">01</span><p>APARTMENT RANKING</p><h2>경산시 아파트 Top 10</h2></div><div class="type-tabs" role="group" aria-label="거래 유형"><button class="active" data-type="sale">매매</button><button data-type="lease">전세</button><button data-type="monthly">월세</button></div></div>
+        <div class="ranking-layout">
+          <div class="ranking-card"><div class="rank-head"><span>순위 / 아파트</span><span>최근 실거래</span></div><div id="rankList" class="rank-list"></div></div>
+          <div class="map-card">
+            <iframe id="mapFrame" title="선택 아파트 위치 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
+            <div class="map-label"><span>SELECTED COMPLEX</span><strong id="mapName">중산자이 1단지</strong><p id="mapAddress">경산시 중산동 705</p></div>
+            <div class="price-pin"><small>최근 실거래</small><strong id="mapPrice">6억 3,500만</strong><span id="mapMeta">84㎡ · 매매</span></div>
+            <button class="map-expand" id="mapExpand" aria-label="큰 지도 열기">↗</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="trend-section">
+        <div class="section-heading"><div><span class="section-no">02</span><p>MARKET PULSE</p><h2>경산 아파트 거래 흐름</h2></div><div class="legend"><i class="sale"></i>매매 <i class="lease"></i>전세</div></div>
+        <div class="chart-card"><canvas id="trendChart" width="1200" height="300" aria-label="거래 가격 추이 그래프"></canvas><div id="chartTooltip" class="chart-tooltip" hidden></div></div>
+      </section>
+
+      <section id="listings" class="listings-section">
+        <div class="section-heading"><div><span class="section-no">03</span><p>LUCKY PICK</p><h2>경산행운 추천매물</h2></div><button id="addListing" class="outline-btn">+ 추천매물 추가</button></div>
+        <div id="listingGrid" class="listing-grid"></div>
+      </section>
+
+      <section id="analysis" class="analysis-section">
+        <div class="analysis-photo"><div class="buildings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span>LOCATION REPORT</span><strong id="analysisName">중산자이 1단지</strong><p id="analysisAddress">경산시 중산동 705</p></div>
+        <div class="analysis-content">
+          <div class="section-heading compact"><div><p>PROPERTY INSIGHT</p><h2>선택 단지 입지분석</h2></div><span class="score">입지점수 <b id="locationScore">88</b></span></div>
+          <div class="analysis-grid">
+            <article><i>學</i><div><span>학군</span><strong id="schoolInfo">성암초 도보 7분</strong></div></article>
+            <article><i>驛</i><div><span>교통</span><strong id="transitInfo">정평역 차량 6분</strong></div></article>
+            <article><i>便</i><div><span>생활</span><strong id="lifeInfo">펜타힐즈 상권 도보권</strong></div></article>
+            <article><i>家</i><div><span>단지</span><strong id="supplyInfo">입주 3년차·대단지</strong></div></article>
+          </div>
+          <p class="analyst-note"><span>행운 한마디</span><b id="analysisNote">실거주 선호와 신축 희소성이 함께 받쳐주는 경산 핵심 주거축입니다.</b></p>
+        </div>
+      </section>
+    </main>
+
+    <footer><div><strong>경산행운부동산</strong><span>경상북도 경산시 아파트 전문</span></div><p>대표전화 <a href="tel:01038182574">010-3818-2574</a></p><small>표시된 정보는 브리핑 참고용이며 계약 전 원문·공부를 확인하세요.</small></footer>
+  </div>
+
+  <dialog id="listingDialog">
+    <form id="listingForm" method="dialog">
+      <div class="dialog-head"><div><span>LUCKY LISTING</span><h3>추천매물 추가</h3></div><button type="button" id="closeDialog">×</button></div>
+      <label>단지<select id="formComplex" required></select></label>
+      <label>한 줄 제목<input id="formTitle" required placeholder="예: 남향 로열층, 탁 트인 조망"></label>
+      <div class="form-row"><label>거래가<input id="formPrice" required placeholder="매매 5억 2,000"></label><label>태그<input id="formBadge" required placeholder="급매"></label></div>
+      <label>면적·층·방향<input id="formMeta" required placeholder="84㎡ · 12층 · 남향"></label>
+      <label>특징<input id="formNote" required placeholder="입주 협의 · 올수리"></label>
+      <button class="submit-btn" value="default">추천매물에 등록</button>
+    </form>
+  </dialog>
+
+  <script src="catalog.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
